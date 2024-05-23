@@ -4,6 +4,8 @@ public class BubbleTeaStoreRegister {
 
 //    ArrayList<BubbleTea> drinksInCart = new ArrayList<>();
     static Scanner s = new Scanner(System.in);
+    static double taxRate = 0.13;
+    static double exchangeRate = 1;
 
 
     public static int getUserChoice(int min, int max, String question){
@@ -85,6 +87,8 @@ public class BubbleTeaStoreRegister {
 
         // To make a sale, we'll need to keep track of the subtotal and the cart
         double subtotal = 0;
+        double tax = 0;
+        double total = 0;
         ArrayList<BubbleTea> currentCart = new ArrayList<>();
 
 
@@ -108,7 +112,13 @@ public class BubbleTeaStoreRegister {
             } // End while
         } // End if
 
-        // If not, print the receipt:
+        // If not, calculate the subtotal, tax rate, and total
+        for (int i = 0; i < currentCart.size(); i++){
+            subtotal += currentCart.get(i).getDrinkCost() * exchangeRate;
+        } // End for
+
+        tax = (subtotal * taxRate) * exchangeRate;
+        total = subtotal + tax;
 
 
 
