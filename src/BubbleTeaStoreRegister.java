@@ -1,4 +1,6 @@
+import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.time.*;
 
 public class BubbleTeaStoreRegister {
 
@@ -6,6 +8,8 @@ public class BubbleTeaStoreRegister {
     static Scanner s = new Scanner(System.in);
     static double taxRate = 0.13;
     static double exchangeRate = 1;
+    static LocalDate currDate = LocalDate.now();
+    static LocalTime currTime = LocalTime.now().truncatedTo(ChronoUnit.SECONDS);
 
 
     public static int getUserChoice(int min, int max, String question){
