@@ -10,6 +10,8 @@ public class BubbleTea {
     private double drinkCost;
 
     public BubbleTea(){
+        toppings = new ArrayList<>();
+
     }
 
     public BubbleTea(String initDrinkBase, String initIceLevel, String initSugarLevel, ArrayList<String> initToppings, double initDrinkCost){
@@ -63,6 +65,11 @@ public class BubbleTea {
     public void setDrinkCost(double drinkCost) {
         this.drinkCost = drinkCost;
     }
+
+
+//    public void addTopping(String topping){
+//        toppings.add(topping);
+//    }
 
     @Override
     public String toString() {
