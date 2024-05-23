@@ -272,6 +272,26 @@ public class BubbleTeaStoreRegister {
         return myDrink;
     }
 
+    public static void administrativeMode(){
+        String[] adminMenu = {"Edit Currency", "Edit Tax Rate", "Add item", "Exit"};
+        int opt;
+
+        while (true){
+
+            printMenu(adminMenu);
+
+            opt = getUserChoice(1, 4, "Enter your choice");
+
+            if (opt == 4){
+                break;
+            }
+
+
+        }
+
+
+    }
+
 
 
 
@@ -292,7 +312,7 @@ public class BubbleTeaStoreRegister {
             if (choice == 1){
                 makeSale(store);
             }else if (choice == 2){
-                // administrative
+                administrativeMode();
             }else{
                 break;
             }
