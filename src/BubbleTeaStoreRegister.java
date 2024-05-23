@@ -2,7 +2,7 @@ import java.util.*;
 
 public class BubbleTeaStoreRegister {
 
-    ArrayList<BubbleTea> drinksInCart = new ArrayList<>();
+//    ArrayList<BubbleTea> drinksInCart = new ArrayList<>();
     static Scanner s = new Scanner(System.in);
 
 
@@ -55,7 +55,7 @@ public class BubbleTeaStoreRegister {
 
 
 
-    public void viewCart(){
+    public void viewCart(ArrayList<BubbleTea> drinksInCart){
         if (drinksInCart.isEmpty()){
             System.out.println("Your Cart is Empty. ");
         }else{
@@ -70,7 +70,7 @@ public class BubbleTeaStoreRegister {
     public static int showMenu(){
         int selection;
 
-        System.out.println("1. Order Drinks");
+        System.out.println("1. Order Drink(s)");
         System.out.println("2. Exit");
 
 
@@ -79,7 +79,43 @@ public class BubbleTeaStoreRegister {
     }
 
 
-    public static void makeSale(){
+    public static void makeSale(BubbleTeaStore store){
+
+        boolean additionalDrinks;
+
+        // To make a sale, we'll need to keep track of the subtotal and the cart
+        double subtotal = 0;
+        ArrayList<BubbleTea> currentCart = new ArrayList<>();
+
+
+
+        // Make one drink at first
+        currentCart.add(createDrink(store));
+
+
+        // Ask if more drinks should be made
+        additionalDrinks = yesOrNo("Create Drink " + (currentCart.size() + 1) + "?");
+        System.out.println();
+
+        // If yes, add as much drinks as needed.
+        if (additionalDrinks){
+            while (true){
+                currentCart.add(createDrink(store));
+                additionalDrinks = yesOrNo("Create Drink " + (currentCart.size() + 1) + "?");
+                if (!additionalDrinks){
+                    break;
+                } // End if
+            } // End while
+        } // End if
+
+        // If not, print the receipt:
+
+
+
+
+
+
+
 
 
 
@@ -202,11 +238,8 @@ public class BubbleTeaStoreRegister {
         choice = getUserChoice(0, store.getSugarLevels().size(), "Choose your Sugar Level: ");
         myDrink.setSugarLevel(store.getSugarLevels().get(choice));
 
-        // Debug line
-        System.out.println(myDrink.toString());
-
-
-
+//        // Debug line
+//        System.out.println(myDrink.toString());
 
         return myDrink;
     }
@@ -229,7 +262,7 @@ public class BubbleTeaStoreRegister {
             choice = showMenu();
 
             if (choice == 1){
-                createDrink(store);
+                makeSale(store);
             }else{
              break;
             }
