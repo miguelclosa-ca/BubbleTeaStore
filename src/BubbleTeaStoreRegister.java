@@ -66,7 +66,9 @@ public class BubbleTeaStoreRegister {
             System.out.println("Your Cart is Empty. ");
         }else{
             for (int i = 0; i < drinksInCart.size(); i++){
-                System.out.println("Drink " + (i+1) + ". " + "\n" +drinksInCart.get(i).toString());
+//                System.out.println("Drink " + (i+1) + ". " + "\n" +drinksInCart.get(i).toString());
+                System.out.println("Drink " + (i+1) + ". " + "\n" +drinksInCart.get(i).printReceiptFormat());
+                System.out.println();
             } // End for
         } // End if
 
@@ -131,7 +133,7 @@ public class BubbleTeaStoreRegister {
         System.out.println("Sale made on ");
         System.out.println(currDate + " at " + currTime);
 
-
+        System.out.println("Drinks: --- ");
         System.out.println("=-=-=-=");
         viewCart(currentCart);
         System.out.println("=-=-=-=");
@@ -139,8 +141,13 @@ public class BubbleTeaStoreRegister {
         System.out.println();
         System.out.println();
 
+        System.out.println("Subtotal: $" + String.format("%.2f", subtotal) );
+        System.out.println("Tax: $" + String.format("%.2f", tax));
+        System.out.println("Total: $" + String.format("%.2f", total));
 
 
+        System.out.println();
+        System.out.println();
 
     }
 
@@ -190,6 +197,9 @@ public class BubbleTeaStoreRegister {
         myDrink.setDrinkBase(tempList.get(choice));
         myDrink.setDrinkCost(myDrink.getDrinkCost() + store.getDrinkBases().get(tempList.get(choice)));
 
+        // Keep track of how much the drink base costs as well
+        myDrink.setBaseCost(store.getDrinkBases().get(tempList.get(choice)));
+
         tempList.clear();
         index = 0;
 
@@ -220,6 +230,9 @@ public class BubbleTeaStoreRegister {
                 // Add the drink topping and topping cost to the drink
                 myDrink.getToppings().add(tempList.get(choice));
                 myDrink.setDrinkCost(myDrink.getDrinkCost() + store.getDrinkToppings().get(tempList.get(choice)));
+
+                // Keep track of the cost of the toppings too
+                myDrink.getToppingCosts().add(store.getDrinkToppings().get(tempList.get(choice)));
 
                 tempList.clear();
                 index = 0;

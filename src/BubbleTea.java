@@ -53,6 +53,10 @@ public class BubbleTea {
         return baseCost;
     }
 
+    public ArrayList<Double> getToppingCosts() {
+        return toppingCosts;
+    }
+
     public void setDrinkBase(String drinkBase) {
         this.drinkBase = drinkBase;
     }
@@ -65,9 +69,6 @@ public class BubbleTea {
         this.sugarLevel = sugarLevel;
     }
 
-    public void setToppings(ArrayList<String> toppings) {
-        this.toppings = toppings;
-    }
 
     public void setDrinkCost(double drinkCost) {
         this.drinkCost = drinkCost;
@@ -80,9 +81,17 @@ public class BubbleTea {
     public String printReceiptFormat(){
         String s = "";
 
-        s += getDrinkBase() + " $" + String.format("%.2f", )
+        s += getDrinkBase() + " $" + String.format("%.2f", getBaseCost()) + "\n";
+        if (!toppings.isEmpty()){
+            s += "Toppings: " + "\n";
+            for (int i = 0; i < getToppings().size(); i++){
+                s += (i+1) + ": " + getToppings().get(i) + " - $" + String.format("%.2f", getToppingCosts().get(i)) + "\n";
+            } // End for
 
-    }
+        } // End if
+        s += getIceLevel() + " " + getSugarLevel();
+        return s;
+    } // String printReceiptFormat()
 
     @Override
     public String toString() {
