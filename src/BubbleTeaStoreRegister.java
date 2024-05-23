@@ -74,15 +74,21 @@ public class BubbleTeaStoreRegister {
 
     } // void viewCart()
 
+    public static void printMenu(String[] options){
+        for (int i = 0; i < options.length; i++){
+            System.out.println((i+1) + ". " + options[i]);
+        } // End for
+
+    } // void printMenu(String[])
+
+
 
     public static int showMenu(){
         int selection;
+        String[] menu = {"Order Drink(s)", "Administrative Options", "Exit"};
+        printMenu(menu);
 
-        System.out.println("1. Order Drink(s)");
-        System.out.println("2. Exit");
-
-
-        selection = getUserChoice(1,2, "Enter your Choice: ");
+        selection = getUserChoice(1,3, "Enter your Choice: ");
         return selection;
     }
 
@@ -269,15 +275,15 @@ public class BubbleTeaStoreRegister {
 
 
 
-
-
-
     public static void main(String[] args){
+
+        // TODO: Add file io
 
         // Create the store
         BubbleTeaStore store = BubbleTeaStore.createStore();
 
         int choice;
+
 
         while (true){
             System.out.println("Welcome to " + store.getStoreName());
@@ -285,8 +291,10 @@ public class BubbleTeaStoreRegister {
 
             if (choice == 1){
                 makeSale(store);
+            }else if (choice == 2){
+                // administrative
             }else{
-             break;
+                break;
             }
 
         }
