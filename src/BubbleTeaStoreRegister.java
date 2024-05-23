@@ -67,7 +67,7 @@ public class BubbleTeaStoreRegister {
         }else{
             for (int i = 0; i < drinksInCart.size(); i++){
 //                System.out.println("Drink " + (i+1) + ". " + "\n" +drinksInCart.get(i).toString());
-                System.out.println("Drink " + (i+1) + ". " + "\n" +drinksInCart.get(i).printReceiptFormat());
+                System.out.println("Drink " + (i+1) + ". " + "\n" +drinksInCart.get(i).printReceiptFormat(exchangeRate));
                 System.out.println();
             } // End for
         } // End if
@@ -136,10 +136,10 @@ public class BubbleTeaStoreRegister {
 
         // If not, calculate the subtotal, tax rate, and total
         for (int i = 0; i < cart.size(); i++){
-            subtotal += cart.get(i).getDrinkCost() * Integer.valueOf(exchange[0]);
+            subtotal += cart.get(i).getDrinkCost() * Double.parseDouble(exchange[0]);
         } // End for
 
-        tax = (subtotal * taxRate) * Integer.valueOf(exchange[0]);
+        tax = (subtotal * taxRate) * Double.parseDouble(exchange[0]);
         total = subtotal + tax;
 
         System.out.println();
@@ -178,6 +178,7 @@ public class BubbleTeaStoreRegister {
         boolean addToppings;
         ArrayList<String> tempList = new ArrayList<>();
         BubbleTea myDrink = new BubbleTea();
+//        String[] exchange = exchangeRate.split(",");
 
         System.out.println();
 
@@ -188,6 +189,9 @@ public class BubbleTeaStoreRegister {
         for (Map.Entry<String, Double> entry: store.getDrinkBases().entrySet()){
 
             System.out.println(index + ". " + entry.getKey() + " - $" + String.format("%.2f", entry.getValue()));
+
+            // If we directly add the exchange rate into the price of each item right now
+//            System.out.println(index + ". " + entry.getKey() + " - " + exchange[1] + String.format("%.2f", (entry.getValue() * Integer.valueOf(exchange[0]))));
             tempList.add(entry.getKey());
             index++;
         } // End for
@@ -282,7 +286,7 @@ public class BubbleTeaStoreRegister {
     }
 
     public static void administrativeMode(){
-        String[] adminMenu = {"Edit Currency", "Edit Tax Rate", "Add item", "Exit"};
+        String[] adminMenu = {"Edit Exchange Rate", "Edit Tax Rate", "Add/Remove item", "Exit"};
         int opt;
 
 
@@ -293,16 +297,46 @@ public class BubbleTeaStoreRegister {
 
             opt = getUserChoice(1, 4, "Enter your choice");
 
-            if (opt == 4){
+            if (opt == 1){
+                // Change the exchange rate
+                setExchangeRate();
+            }else if (opt == 2){
+                // Change the tax rate
+            }else if (opt == 3){
+                // Add or remove an item
+            }else{
+                // Exit administrative options
                 break;
-            }
+            } // End if
 
 
-        }
+        } // End while
+
+
+    } // void administrativeMode()
+
+    public static void setExchangeRate(){
+        String[] rates = {"1,$", "114,円", "995.97,₩", "0.73,$", "0.67€", "0.57,£", "2.73,﷼"};
+        String[] rateNames = {"Canadian Dollar", "Japanese Yen", "South Korean Won", "US Dollar", "Euro", "British Pounds", "Saudi Riyals"};
+        int opt;
+
+        System.out.println();
+        System.out.println("The currency in use right now is: " + rateNames[Arrays.asList(rates).indexOf(exchangeRate)]);
+        System.out.println();
+        printMenu(rateNames);
+        opt = getUserChoice(1, 7, "Which currency to change to?: ") - 1;
+
+        if (rates[opt].equals(exchangeRate)){
+            System.out.println("Exchange rate will not be changed!");
+        }else{
+            exchangeRate = rates[opt];
+            System.out.println("Exchange rate changed to " + rateNames[Arrays.asList(rates).indexOf(exchangeRate)] + ".");
+        } // End if
+
+        System.out.println();
 
 
     }
-
 
 
 

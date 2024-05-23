@@ -78,14 +78,15 @@ public class BubbleTea {
         this.baseCost = baseCost;
     }
 
-    public String printReceiptFormat(){
+    public String printReceiptFormat(String exchangeRate){
         String s = "";
+        String[] exchange = exchangeRate.split(",");
 
-        s += getDrinkBase() + " $" + String.format("%.2f", getBaseCost()) + "\n";
+        s += getDrinkBase() + " " + exchange[1] + String.format("%.2f", (getBaseCost() * Double.parseDouble(exchange[0]))) + "\n";
         if (!toppings.isEmpty()){
             s += "Toppings: " + "\n";
             for (int i = 0; i < getToppings().size(); i++){
-                s += (i+1) + ": " + getToppings().get(i) + " - $" + String.format("%.2f", getToppingCosts().get(i)) + "\n";
+                s += (i+1) + ": " + getToppings().get(i) + " - "+ exchange[1] + String.format("%.2f", (getToppingCosts().get(i) * Double.parseDouble(exchange[0]))) + "\n";
             } // End for
 
         } // End if
