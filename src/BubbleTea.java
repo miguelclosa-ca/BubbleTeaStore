@@ -1,17 +1,18 @@
+import java.util.ArrayList;
+
 public class BubbleTea {
 
 
     private String drinkBase, iceLevel, sugarLevel;
 
-    // A drink can have up to 3 toppings at once
-    private String[] toppings = new String[3];
+    private ArrayList<String> toppings;
 
     private double drinkCost;
 
     public BubbleTea(){
     }
 
-    public BubbleTea(String initDrinkBase, String initIceLevel, String initSugarLevel, String[] initToppings, double initDrinkCost){
+    public BubbleTea(String initDrinkBase, String initIceLevel, String initSugarLevel, ArrayList<String> initToppings, double initDrinkCost){
         drinkBase = initDrinkBase;
         iceLevel = initIceLevel;
         sugarLevel = initSugarLevel;
@@ -35,7 +36,7 @@ public class BubbleTea {
         return sugarLevel;
     }
 
-    public String[] getToppings() {
+    public ArrayList<String> getToppings() {
         return toppings;
     }
 
@@ -55,7 +56,7 @@ public class BubbleTea {
         this.sugarLevel = sugarLevel;
     }
 
-    public void setToppings(String[] toppings) {
+    public void setToppings(ArrayList<String> toppings) {
         this.toppings = toppings;
     }
 
@@ -63,5 +64,24 @@ public class BubbleTea {
         this.drinkCost = drinkCost;
     }
 
+    @Override
+    public String toString() {
 
+
+        // Create the string to return
+        String s = "";
+
+        s += "===" + "\n";
+        if (!getToppings().isEmpty()){
+            s += getDrinkBase() + " with toppings:" + "\n";
+            for (int i = 0; i < getToppings().size(); i++){
+                s += i + ". " + getToppings().get(i) + "\n";
+            } // End for
+            s += "with " + getIceLevel() + " and " + getSugarLevel() + " at a cost of $" + String.format("%.2f", getDrinkCost()) + "\n";
+        }else{
+            s += getDrinkBase() + " with no toppings, with " + getIceLevel() + " and " + getSugarLevel() + " at a cost of $" + String.format("%.2f", getDrinkCost()) + "\n";
+        } // End if
+        s += "===";
+        return s;
+    }
 }
