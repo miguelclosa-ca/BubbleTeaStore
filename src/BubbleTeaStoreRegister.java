@@ -130,6 +130,7 @@ public class BubbleTeaStoreRegister {
         System.out.println();
 
         System.out.println(store.getStoreName());
+        System.out.println(store.getStoreLocation());
         System.out.println("Sale made on ");
         System.out.println(currDate + " at " + currTime);
 

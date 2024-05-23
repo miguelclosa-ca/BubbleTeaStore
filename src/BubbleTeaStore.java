@@ -2,7 +2,7 @@ import java.util.*;
 
 public class BubbleTeaStore {
 
-    private String storeName;
+    private String storeName, storeLocation;
 
 
 
@@ -18,8 +18,9 @@ public class BubbleTeaStore {
 
 
 
-    public BubbleTeaStore(String initName){
+    public BubbleTeaStore(String initName, String initLocation){
         storeName = initName;
+        storeLocation = initLocation;
         drinkBases = new HashMap<>();
         drinkToppings = new HashMap<>();
 
@@ -34,6 +35,10 @@ public class BubbleTeaStore {
 
     public String getStoreName() {
         return storeName;
+    }
+
+    public String getStoreLocation() {
+        return storeLocation;
     }
 
     public HashMap<String, Double> getDrinkBases() {
@@ -73,7 +78,7 @@ public class BubbleTeaStore {
 
         // Create a store with a name
 
-        BubbleTeaStore myStore = new BubbleTeaStore("My Cool Boba Store");
+        BubbleTeaStore myStore = new BubbleTeaStore("My Cool Boba Store", "Toronto, ON");
 
         // Initialize the ice and sugar levels available in this store
         myStore.getIceLevels().addAll(List.of(exampleIceLevels));
