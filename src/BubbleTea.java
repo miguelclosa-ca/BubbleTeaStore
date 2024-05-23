@@ -7,10 +7,13 @@ public class BubbleTea {
 
     private ArrayList<String> toppings;
 
-    private double drinkCost;
+    private ArrayList<Double> toppingCosts;
+
+    private double baseCost, drinkCost;
 
     public BubbleTea(){
         toppings = new ArrayList<>();
+        toppingCosts = new ArrayList<>();
 
     }
 
@@ -46,6 +49,10 @@ public class BubbleTea {
         return drinkCost;
     }
 
+    public double getBaseCost() {
+        return baseCost;
+    }
+
     public void setDrinkBase(String drinkBase) {
         this.drinkBase = drinkBase;
     }
@@ -66,10 +73,14 @@ public class BubbleTea {
         this.drinkCost = drinkCost;
     }
 
+    public void setBaseCost(double baseCost) {
+        this.baseCost = baseCost;
+    }
 
     public String printReceiptFormat(){
         String s = "";
 
+        s += getDrinkBase() + " $" + String.format("%.2f", )
 
     }
 
