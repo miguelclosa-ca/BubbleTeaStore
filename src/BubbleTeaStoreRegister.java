@@ -145,8 +145,6 @@ public class BubbleTeaStoreRegister {
         System.out.println("Tax: $" + String.format("%.2f", tax));
         System.out.println("Total: $" + String.format("%.2f", total));
 
-
-        System.out.println();
         System.out.println();
 
     }
@@ -181,16 +179,6 @@ public class BubbleTeaStoreRegister {
         // Get the user's choice
         choice = getUserChoice(0, store.getDrinkBases().size() - 1, "Choose your base: ");
 
-//        // Debug lines
-//        System.out.println(choice);
-//        for (int i = 0; i < tempList.size(); i++){
-//            System.out.println(i + ". " + tempList.get(i));
-//        }
-//        System.out.println(store.getDrinkBases().containsKey(tempList.get(choice)));
-//        System.out.println(tempList.get(choice));
-//        System.out.println(store.getDrinkBases().get(tempList.get(choice)));
-//
-//        // End of debug lines
 
 
         // Add the drink base and drink cost to the drink
@@ -273,8 +261,6 @@ public class BubbleTeaStoreRegister {
         choice = getUserChoice(0, store.getSugarLevels().size(), "Choose your Sugar Level: ");
         myDrink.setSugarLevel(store.getSugarLevels().get(choice));
 
-//        // Debug line
-//        System.out.println(myDrink.toString());
 
         return myDrink;
     }
