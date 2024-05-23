@@ -67,9 +67,11 @@ public class BubbleTea {
     }
 
 
-//    public void addTopping(String topping){
-//        toppings.add(topping);
-//    }
+    public String printReceiptFormat(){
+        String s = "";
+
+
+    }
 
     @Override
     public String toString() {
@@ -78,10 +80,7 @@ public class BubbleTea {
         // Create the string to return
         String s = "";
 
-
         s += "===" + "\n";
-
-
         // If there are toppings in the order
         if (!getToppings().isEmpty()){
             s += getDrinkBase() + " with toppings:" + "\n";

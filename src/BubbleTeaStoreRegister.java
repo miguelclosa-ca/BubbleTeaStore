@@ -61,12 +61,12 @@ public class BubbleTeaStoreRegister {
 
 
 
-    public void viewCart(ArrayList<BubbleTea> drinksInCart){
+    public static void viewCart(ArrayList<BubbleTea> drinksInCart){
         if (drinksInCart.isEmpty()){
             System.out.println("Your Cart is Empty. ");
         }else{
             for (int i = 0; i < drinksInCart.size(); i++){
-                System.out.println(i + ". " + drinksInCart.get(i).toString());
+                System.out.println("Drink " + (i+1) + ". " + "\n" +drinksInCart.get(i).toString());
             } // End for
         } // End if
 
@@ -124,12 +124,20 @@ public class BubbleTeaStoreRegister {
         tax = (subtotal * taxRate) * exchangeRate;
         total = subtotal + tax;
 
+        System.out.println();
+        System.out.println();
+
+        System.out.println(store.getStoreName());
+        System.out.println("Sale made on ");
+        System.out.println(currDate + " at " + currTime);
 
 
+        System.out.println("=-=-=-=");
+        viewCart(currentCart);
+        System.out.println("=-=-=-=");
 
-
-
-
+        System.out.println();
+        System.out.println();
 
 
 
