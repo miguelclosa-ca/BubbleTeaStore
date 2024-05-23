@@ -7,7 +7,7 @@ public class BubbleTeaStoreRegister {
 //    ArrayList<BubbleTea> drinksInCart = new ArrayList<>();
     static Scanner s = new Scanner(System.in);
     static double taxRate = 0.13;
-    static double exchangeRate = 1;
+    static String exchangeRate = "1,$";
     static LocalDate currDate = LocalDate.now();
     static LocalTime currTime = LocalTime.now().truncatedTo(ChronoUnit.SECONDS);
 
@@ -93,14 +93,11 @@ public class BubbleTeaStoreRegister {
     }
 
 
-    public static void makeSale(BubbleTeaStore store){
+    public static ArrayList<BubbleTea> makeSale(BubbleTeaStore store){
 
         boolean additionalDrinks;
 
-        // To make a sale, we'll need to keep track of the subtotal and the cart
-        double subtotal = 0;
-        double tax = 0;
-        double total = 0;
+        // To make a sale, we'll need to keep track of the cart
         ArrayList<BubbleTea> currentCart = new ArrayList<>();
 
 
@@ -124,12 +121,25 @@ public class BubbleTeaStoreRegister {
             } // End while
         } // End if
 
+        return currentCart;
+
+
+    }
+
+    public static void printReceipt(ArrayList<BubbleTea> cart, BubbleTeaStore store){
+
+        double subtotal = 0;
+        double tax = 0;
+        double total = 0;
+        String[] exchange = exchangeRate.split(",");
+
+
         // If not, calculate the subtotal, tax rate, and total
-        for (int i = 0; i < currentCart.size(); i++){
-            subtotal += currentCart.get(i).getDrinkCost() * exchangeRate;
+        for (int i = 0; i < cart.size(); i++){
+            subtotal += cart.get(i).getDrinkCost() * Integer.valueOf(exchange[0]);
         } // End for
 
-        tax = (subtotal * taxRate) * exchangeRate;
+        tax = (subtotal * taxRate) * Integer.valueOf(exchange[0]);
         total = subtotal + tax;
 
         System.out.println();
@@ -137,23 +147,22 @@ public class BubbleTeaStoreRegister {
 
         System.out.println(store.getStoreName());
         System.out.println(store.getStoreLocation());
-        System.out.println("Sale made on ");
-        System.out.println(currDate + " at " + currTime);
+        System.out.println("Sale made on " + currDate + " at " + currTime);
+        System.out.println();
 
         System.out.println("Drinks: --- ");
         System.out.println("=-=-=-=");
-        viewCart(currentCart);
+        viewCart(cart);
         System.out.println("=-=-=-=");
 
         System.out.println();
         System.out.println();
 
-        System.out.println("Subtotal: $" + String.format("%.2f", subtotal) );
-        System.out.println("Tax: $" + String.format("%.2f", tax));
-        System.out.println("Total: $" + String.format("%.2f", total));
+        System.out.println("Subtotal: "+ exchange[1] + String.format("%.2f", subtotal) );
+        System.out.println("Tax: "+ exchange[1] + String.format("%.2f", tax));
+        System.out.println("Total: "+ exchange[1] + String.format("%.2f", total));
 
         System.out.println();
-
     }
 
 
@@ -276,6 +285,8 @@ public class BubbleTeaStoreRegister {
         String[] adminMenu = {"Edit Currency", "Edit Tax Rate", "Add item", "Exit"};
         int opt;
 
+
+
         while (true){
 
             printMenu(adminMenu);
@@ -310,7 +321,7 @@ public class BubbleTeaStoreRegister {
             choice = showMenu();
 
             if (choice == 1){
-                makeSale(store);
+                printReceipt(makeSale(store), store);
             }else if (choice == 2){
                 administrativeMode();
             }else{
