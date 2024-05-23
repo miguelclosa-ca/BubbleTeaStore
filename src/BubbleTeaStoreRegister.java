@@ -95,6 +95,7 @@ public class BubbleTeaStoreRegister {
     public static BubbleTea createDrink(BubbleTeaStore store){
 
         int choice;
+        int index = 0;
         boolean addToppings;
         ArrayList<String> tempList = new ArrayList<>();
         BubbleTea myDrink = new BubbleTea();
@@ -107,23 +108,24 @@ public class BubbleTeaStoreRegister {
         System.out.println("Choose a drink base: ");
         for (Map.Entry<String, Double> entry: store.getDrinkBases().entrySet()){
 
-            System.out.println(entry.getKey() + " - $" + String.format("%.2f", entry.getValue()));
+            System.out.println(index + ". " + entry.getKey() + " - $" + String.format("%.2f", entry.getValue()));
             tempList.add(entry.getKey());
+            index++;
         } // End for
 
         // Get the user's choice
         choice = getUserChoice(0, store.getDrinkBases().size() - 1, "Choose your base: ");
 
-        // Debug lines
-        System.out.println(choice);
-        for (int i = 0; i < tempList.size(); i++){
-            System.out.println(i + ". " + tempList.get(i));
-        }
-        System.out.println(store.getDrinkBases().containsKey(tempList.get(choice)));
-        System.out.println(tempList.get(choice));
-        System.out.println(store.getDrinkBases().get(tempList.get(choice)));
-
-        // End of debug lines
+//        // Debug lines
+//        System.out.println(choice);
+//        for (int i = 0; i < tempList.size(); i++){
+//            System.out.println(i + ". " + tempList.get(i));
+//        }
+//        System.out.println(store.getDrinkBases().containsKey(tempList.get(choice)));
+//        System.out.println(tempList.get(choice));
+//        System.out.println(store.getDrinkBases().get(tempList.get(choice)));
+//
+//        // End of debug lines
 
 
         // Add the drink base and drink cost to the drink
@@ -131,6 +133,7 @@ public class BubbleTeaStoreRegister {
         myDrink.setDrinkCost(myDrink.getDrinkCost() + store.getDrinkBases().get(tempList.get(choice)));
 
         tempList.clear();
+        index = 0;
 
         // Ask if toppings would like to be added
         System.out.println();
@@ -149,16 +152,19 @@ public class BubbleTeaStoreRegister {
 
                 System.out.println("Choose a topping: ");
                 for (Map.Entry<String, Double> entry : store.getDrinkToppings().entrySet()){
-                    System.out.println(entry.getKey() + " - $" + String.format("%.2f", entry.getValue()));
+                    System.out.println(index + ". " + entry.getKey() + " - $" + String.format("%.2f", entry.getValue()));
                     tempList.add(entry.getKey());
+                    index++;
                 } // End for
 
                 choice = getUserChoice(0, store.getDrinkToppings().size() - 1, "Choose your topping: ");
 
                 // Add the drink topping and topping cost to the drink
-//                myDrink.addTopping(tempList.get(choice));
                 myDrink.getToppings().add(tempList.get(choice));
                 myDrink.setDrinkCost(myDrink.getDrinkCost() + store.getDrinkToppings().get(tempList.get(choice)));
+
+                tempList.clear();
+                index = 0;
 
                 // Ask the user if they would like to add another topping
                 addMoreToppings = yesOrNo("Add more toppings? ");
@@ -172,6 +178,32 @@ public class BubbleTeaStoreRegister {
             System.out.println("No toppings to be added. ");
             System.out.println();
         } // End if
+
+        // After adding toppings (or not), add ice levels:
+
+        System.out.println();
+
+
+        // Show all ice levels
+        for (int i = 0; i < store.getIceLevels().size(); i++){
+            System.out.println(i + ". " + store.getIceLevels().get(i));
+        } // End for
+
+        // Ask the user what ice level they would like
+        // then add the ice level to the drink
+        choice = getUserChoice(0, store.getIceLevels().size(), "Choose your Ice Level: ");
+        myDrink.setIceLevel(store.getIceLevels().get(choice));
+
+        // After adding the ice, add the sugar
+
+        for (int i = 0; i < store.getSugarLevels().size(); i++){
+            System.out.println(i + ". " + store.getSugarLevels().get(i));
+        } // End for
+        choice = getUserChoice(0, store.getSugarLevels().size(), "Choose your Sugar Level: ");
+        myDrink.setSugarLevel(store.getSugarLevels().get(choice));
+
+        // Debug line
+        System.out.println(myDrink.toString());
 
 
 

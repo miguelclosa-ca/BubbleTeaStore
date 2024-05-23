@@ -78,15 +78,19 @@ public class BubbleTea {
         // Create the string to return
         String s = "";
 
+
         s += "===" + "\n";
+
+
+        // If there are toppings in the order
         if (!getToppings().isEmpty()){
             s += getDrinkBase() + " with toppings:" + "\n";
             for (int i = 0; i < getToppings().size(); i++){
-                s += i + ". " + getToppings().get(i) + "\n";
+                s += i+1 + ". " + getToppings().get(i) + "\n";
             } // End for
             s += "with " + getIceLevel() + " and " + getSugarLevel() + " at a cost of $" + String.format("%.2f", getDrinkCost()) + "\n";
         }else{
-            s += getDrinkBase() + " with no toppings, with " + getIceLevel() + " and " + getSugarLevel() + " at a cost of $" + String.format("%.2f", getDrinkCost()) + "\n";
+            s += getDrinkBase() + " with no toppings, " + getIceLevel() + " and " + getSugarLevel() + " at a cost of $" + String.format("%.2f", getDrinkCost()) + "\n";
         } // End if
         s += "===";
         return s;
