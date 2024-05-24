@@ -302,6 +302,7 @@ public class BubbleTeaStoreRegister {
                 setExchangeRate();
             }else if (opt == 2){
                 // Change the tax rate
+                setTaxRate();
             }else if (opt == 3){
                 // Add or remove an item
             }else{
@@ -335,6 +336,22 @@ public class BubbleTeaStoreRegister {
 
         System.out.println();
 
+
+    }
+
+    public static void setTaxRate(){
+        double opt;
+
+        System.out.println();
+        System.out.println("The tax rate is currently: " + String.format("%.2f", (taxRate * 100)) + "%.");
+        System.out.println();
+
+        System.out.print("Enter a tax rate to change to: ");
+        opt = (s.nextDouble()) / 100;
+
+        taxRate = opt;
+
+        System.out.println("The tax rate is now: " + String.format("%.2f", (taxRate * 100)) + "%.");
 
     }
 
