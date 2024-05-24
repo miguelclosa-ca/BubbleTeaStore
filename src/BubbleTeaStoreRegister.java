@@ -5,7 +5,7 @@ import java.time.*;
 public class BubbleTeaStoreRegister {
 
     static Scanner s = new Scanner(System.in);
-    static String exchangeRate = "1,$";
+//    static String exchangeRate = "1,$";
     static LocalDate currDate = LocalDate.now();
     static LocalTime currTime = LocalTime.now().truncatedTo(ChronoUnit.SECONDS);
 
@@ -59,7 +59,7 @@ public class BubbleTeaStoreRegister {
 
 
 
-    public static void viewCart(ArrayList<BubbleTea> drinksInCart){
+    public static void viewCart(ArrayList<BubbleTea> drinksInCart, String exchangeRate){
         if (drinksInCart.isEmpty()){
             System.out.println("Your Cart is Empty. ");
         }else{
@@ -129,7 +129,7 @@ public class BubbleTeaStoreRegister {
         double subtotal = 0;
         double tax = 0;
         double total = 0;
-        String[] exchange = exchangeRate.split(",");
+        String[] exchange = store.getExchangeRate().split(",");
 
 
         // If not, calculate the subtotal, tax rate, and total
@@ -137,8 +137,8 @@ public class BubbleTeaStoreRegister {
             subtotal += cart.get(i).getDrinkCost() * Double.parseDouble(exchange[0]);
         } // End for
 
-        tax = (subtotal * store.getTaxRate()) * Double.parseDouble(exchange[0]);
-        total = subtotal + tax;
+        tax = (subtotal * store.getTaxRate());
+        total = (subtotal + tax);
 
         System.out.println();
         System.out.println();
@@ -150,7 +150,7 @@ public class BubbleTeaStoreRegister {
 
         System.out.println("Drinks: --- ");
         System.out.println("=-=-=-=");
-        viewCart(cart);
+        viewCart(cart, store.getExchangeRate());
         System.out.println("=-=-=-=");
 
         System.out.println();
@@ -297,7 +297,7 @@ public class BubbleTeaStoreRegister {
 
             if (opt == 1){
                 // Change the exchange rate
-                setExchangeRate();
+                store.setExchangeRate(changeExchangeRate(store.getExchangeRate()));
             }else if (opt == 2){
                 // Change the tax rate
 //                changeTaxRate();
@@ -315,25 +315,26 @@ public class BubbleTeaStoreRegister {
 
     } // void administrativeMode()
 
-    public static void setExchangeRate(){
+    public static String changeExchangeRate(String currentExRate){
         String[] rates = {"1,$", "114,円", "995.97,₩", "0.73,$", "0.67€", "0.57,£", "2.73,﷼"};
         String[] rateNames = {"Canadian Dollar", "Japanese Yen", "South Korean Won", "US Dollar", "Euro", "British Pounds", "Saudi Riyals"};
         int opt;
 
         System.out.println();
-        System.out.println("The currency in use right now is: " + rateNames[Arrays.asList(rates).indexOf(exchangeRate)]);
+        System.out.println("The currency in use right now is: " + rateNames[Arrays.asList(rates).indexOf(currentExRate)]);
         System.out.println();
         printMenu(rateNames);
         opt = getUserChoice(1, 7, "Which currency to change to?: ") - 1;
 
-        if (rates[opt].equals(exchangeRate)){
+        if (rates[opt].equals(currentExRate)){
             System.out.println("Exchange rate will not be changed!");
         }else{
-            exchangeRate = rates[opt];
-            System.out.println("Exchange rate changed to " + rateNames[Arrays.asList(rates).indexOf(exchangeRate)] + ".");
+            currentExRate = rates[opt];
+            System.out.println("Exchange rate changed to " + rateNames[Arrays.asList(rates).indexOf(currentExRate)] + ".");
         } // End if
 
         System.out.println();
+        return currentExRate;
 
 
     }

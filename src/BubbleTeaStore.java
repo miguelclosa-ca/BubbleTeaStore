@@ -3,6 +3,7 @@ import java.util.*;
 public class BubbleTeaStore {
 
     private String storeName, storeLocation;
+    private String exchangeRate;
 
 
     private double taxRate;
@@ -29,6 +30,7 @@ public class BubbleTeaStore {
         iceLevels = new ArrayList<>();
         sugarLevels = new ArrayList<>();
         taxRate = 0.13;
+        exchangeRate = "1,$";
     }
 
     /**
@@ -66,6 +68,14 @@ public class BubbleTeaStore {
 
     public void setTaxRate(double taxRate) {
         this.taxRate = taxRate;
+    }
+
+    public String getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public void setExchangeRate(String exchangeRate) {
+        this.exchangeRate = exchangeRate;
     }
 
     public static BubbleTeaStore createStore(){
