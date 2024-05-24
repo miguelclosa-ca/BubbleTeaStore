@@ -4,9 +4,7 @@ import java.time.*;
 
 public class BubbleTeaStoreRegister {
 
-//    ArrayList<BubbleTea> drinksInCart = new ArrayList<>();
     static Scanner s = new Scanner(System.in);
-    static double taxRate = 0.13;
     static String exchangeRate = "1,$";
     static LocalDate currDate = LocalDate.now();
     static LocalTime currTime = LocalTime.now().truncatedTo(ChronoUnit.SECONDS);
@@ -139,7 +137,7 @@ public class BubbleTeaStoreRegister {
             subtotal += cart.get(i).getDrinkCost() * Double.parseDouble(exchange[0]);
         } // End for
 
-        tax = (subtotal * taxRate) * Double.parseDouble(exchange[0]);
+        tax = (subtotal * store.getTaxRate()) * Double.parseDouble(exchange[0]);
         total = subtotal + tax;
 
         System.out.println();
@@ -285,7 +283,7 @@ public class BubbleTeaStoreRegister {
         return myDrink;
     }
 
-    public static void administrativeMode(){
+    public static void administrativeMode(BubbleTeaStore store){
         String[] adminMenu = {"Edit Exchange Rate", "Edit Tax Rate", "Add/Remove item", "Exit"};
         int opt;
 
@@ -302,7 +300,8 @@ public class BubbleTeaStoreRegister {
                 setExchangeRate();
             }else if (opt == 2){
                 // Change the tax rate
-                setTaxRate();
+//                changeTaxRate();
+                store.setTaxRate(changeTaxRate(store.getTaxRate()));
             }else if (opt == 3){
                 // Add or remove an item
             }else{
@@ -339,19 +338,21 @@ public class BubbleTeaStoreRegister {
 
     }
 
-    public static void setTaxRate(){
+    public static double changeTaxRate(double currentRate){
         double opt;
 
         System.out.println();
-        System.out.println("The tax rate is currently: " + String.format("%.2f", (taxRate * 100)) + "%.");
+        System.out.println("The tax rate is currently: " + String.format("%.2f", (currentRate * 100)) + "%.");
         System.out.println();
 
         System.out.print("Enter a tax rate to change to: ");
         opt = (s.nextDouble()) / 100;
 
-        taxRate = opt;
+        currentRate = opt;
 
-        System.out.println("The tax rate is now: " + String.format("%.2f", (taxRate * 100)) + "%.");
+        System.out.println("The tax rate is now: " + String.format("%.2f", (currentRate * 100)) + "%.");
+
+        return currentRate;
 
     }
 
@@ -374,7 +375,7 @@ public class BubbleTeaStoreRegister {
             if (choice == 1){
                 printReceipt(makeSale(store), store);
             }else if (choice == 2){
-                administrativeMode();
+                administrativeMode(store);
             }else{
                 break;
             }

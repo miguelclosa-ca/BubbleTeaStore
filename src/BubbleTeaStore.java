@@ -5,6 +5,9 @@ public class BubbleTeaStore {
     private String storeName, storeLocation;
 
 
+    private double taxRate;
+
+
 
     // Since different drinks have different prices, it would make sense to store drink bases in a HashMap
     // So that we can both store the drink name and the price
@@ -23,9 +26,9 @@ public class BubbleTeaStore {
         storeLocation = initLocation;
         drinkBases = new HashMap<>();
         drinkToppings = new HashMap<>();
-
         iceLevels = new ArrayList<>();
         sugarLevels = new ArrayList<>();
+        taxRate = 0.13;
     }
 
     /**
@@ -57,6 +60,13 @@ public class BubbleTeaStore {
         return sugarLevels;
     }
 
+    public double getTaxRate() {
+        return taxRate;
+    }
+
+    public void setTaxRate(double taxRate) {
+        this.taxRate = taxRate;
+    }
 
     public static BubbleTeaStore createStore(){
 
