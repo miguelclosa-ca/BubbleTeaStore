@@ -172,7 +172,7 @@ public class BubbleTeaStoreRegister {
     public static BubbleTea createDrink(BubbleTeaStore store){
 
         int choice;
-        int index = 0;
+        int index = 1;
         boolean addToppings;
         ArrayList<String> tempList = new ArrayList<>();
         BubbleTea myDrink = new BubbleTea();
@@ -195,7 +195,7 @@ public class BubbleTeaStoreRegister {
         } // End for
 
         // Get the user's choice
-        choice = getUserChoice(0, store.getDrinkBases().size() - 1, "Choose your base: ");
+        choice = getUserChoice(0, store.getDrinkBases().size(), "Choose your base: ") - 1;
 
 
 
@@ -207,7 +207,7 @@ public class BubbleTeaStoreRegister {
         myDrink.setBaseCost(store.getDrinkBases().get(tempList.get(choice)));
 
         tempList.clear();
-        index = 0;
+        index = 1;
 
         // Ask if toppings would like to be added
         System.out.println();
@@ -231,7 +231,7 @@ public class BubbleTeaStoreRegister {
                     index++;
                 } // End for
 
-                choice = getUserChoice(0, store.getDrinkToppings().size() - 1, "Choose your topping: ");
+                choice = getUserChoice(0, store.getDrinkToppings().size(), "Choose your topping: ") - 1;
 
                 // Add the drink topping and topping cost to the drink
                 myDrink.getToppings().add(tempList.get(choice));
@@ -263,20 +263,20 @@ public class BubbleTeaStoreRegister {
 
         // Show all ice levels
         for (int i = 0; i < store.getIceLevels().size(); i++){
-            System.out.println(i + ". " + store.getIceLevels().get(i));
+            System.out.println((i+1) + ". " + store.getIceLevels().get(i));
         } // End for
 
         // Ask the user what ice level they would like
         // then add the ice level to the drink
-        choice = getUserChoice(0, store.getIceLevels().size(), "Choose your Ice Level: ");
+        choice = getUserChoice(1, store.getIceLevels().size(), "Choose your Ice Level: ") - 1;
         myDrink.setIceLevel(store.getIceLevels().get(choice));
 
         // After adding the ice, add the sugar
 
         for (int i = 0; i < store.getSugarLevels().size(); i++){
-            System.out.println(i + ". " + store.getSugarLevels().get(i));
+            System.out.println((i+1) + ". " + store.getSugarLevels().get(i));
         } // End for
-        choice = getUserChoice(0, store.getSugarLevels().size(), "Choose your Sugar Level: ");
+        choice = getUserChoice(0, store.getSugarLevels().size(), "Choose your Sugar Level: ") - 1;
         myDrink.setSugarLevel(store.getSugarLevels().get(choice));
 
 
@@ -300,7 +300,6 @@ public class BubbleTeaStoreRegister {
                 store.setExchangeRate(changeExchangeRate(store.getExchangeRate()));
             }else if (opt == 2){
                 // Change the tax rate
-//                changeTaxRate();
                 store.setTaxRate(changeTaxRate(store.getTaxRate()));
             }else if (opt == 3){
                 // Add or remove an item
