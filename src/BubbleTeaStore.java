@@ -173,22 +173,40 @@ public class BubbleTeaStore implements Serializable{
 
     } // static boolean writeStoreToFile(BubbleTeaStore, String)
 
+
+    /**
+     * Load a store a file.
+     * @param filename The name of the file to load
+     * @return The store
+     */
     public static BubbleTeaStore loadStoreFile(String filename){
         try{
+
+            // Open the file, read in the object and parse it as a BubbleTeaStore object
             ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename));
 
             BubbleTeaStore store = (BubbleTeaStore) in.readObject();
 
-            in.close();
 
+            // Close the file and return the store
+            in.close();
             return store;
 
         } catch (ClassNotFoundException | IOException e) {
             return null;
-        }
-
-
+        } // End try
     }
+
+    /**
+     * Check if a file exists in directory.
+     * @param filename the name of the file to search for
+     * @return Whether it exists (true) or not (false)
+     */
+    public static boolean storeExists(String filename){
+        File fileToCheck = new File(filename);
+        boolean exists = fileToCheck.exists();
+        return exists;
+    } // static boolean storeExists(String)
 
 
 }

@@ -359,26 +359,44 @@ public class BubbleTeaStoreRegister {
 
     public static BubbleTeaStore loadStore(){
         int opt;
+        String filename;
         BubbleTeaStore store = null;
         String[] initialOptions = {"Read from file", "Load example store"};
         // Load a store saved on the computer or open an example store
 
-        // Ask the user
+        // Ask the user for their choice
         printMenu(initialOptions);
         opt = getUserChoice(1, 2, "Select an option: ");
 
+
+        // If they choose to open a file,
         if (opt == 1){
-            // load from file
-            store = BubbleTeaStore.loadStoreFile("ExampleStore.txt");
+            // Specify what file to load
+            while (true){
+                System.out.print("Enter the filename: ");
+                filename = s.nextLine();
+
+                // If the file exists, load the store from that file
+                if (BubbleTeaStore.storeExists(filename)){
+                    store = BubbleTeaStore.loadStoreFile(filename);
+                    break;
+
+                    // Otherwise, do not load the file and ask for another file
+                }else{
+                    System.out.println(filename + " does not exist. Enter a different name.");
+                } // End if
+            } // End while
+
+
+            // Otherwise, create a store from the BubbleTeaStore.createStore() method
         }else{
             // Create an example store
             store = BubbleTeaStore.createStore();
         } // End if
 
-
+        // Return the store
         return store;
-    }
-
+    } // static BubbleTeaStore loadStore()
 
 
     public static void main(String[] args) throws IOException {
