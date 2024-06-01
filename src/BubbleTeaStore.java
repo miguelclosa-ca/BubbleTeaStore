@@ -122,28 +122,56 @@ public class BubbleTeaStore implements Serializable{
 
     } // static BubbleTeaStore createStore()
 
-    public static boolean writeExampleStoreFile() throws IOException {
+//    public static boolean writeExampleStoreFile() throws IOException {
+//
+//        // For now, create an example file
+//        BubbleTeaStore exampleStore = createStore();
+//
+//
+//        // Push its contents to a file
+//        try{
+//            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("ExampleStore.txt"));
+//
+//            // Save the store to file
+//            out.writeObject(exampleStore);
+//
+//            out.close();
+//
+//        }catch (IOException e){
+//            return false;
+//        } // End try
+//
+//        return true;
+//
+//    }
 
-        // For now, create an example file
-        BubbleTeaStore exampleStore = createStore();
+    /**
+     * Create a BubbleTeaStore object text file in the directory.
+     * @param store The store to save
+     * @param filename The .txt file to save it to
+     * @return If it was successful (true) or not (false)
+     * @throws IOException
+     */
+    public static boolean writeStoreToFile(BubbleTeaStore store, String filename) throws IOException {
 
-
-        // Push its contents to a file
         try{
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("ExampleStore.txt"));
 
-            // Save the store to file
-            out.writeObject(exampleStore);
+            // Copy the contents of the store to a file
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
+            out.writeObject(store);
 
+            // Close the file
             out.close();
 
-        }catch (IOException e){
+            // If there is an IOException, return false
+        } catch (IOException e){
             return false;
         } // End try
-
+        // Otherwise return true
         return true;
 
-    }
+
+    } // static boolean writeStoreToFile(BubbleTeaStore, String)
 
     public static BubbleTeaStore loadStoreFile(String filename){
         try{

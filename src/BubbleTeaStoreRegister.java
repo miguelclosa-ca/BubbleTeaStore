@@ -384,6 +384,7 @@ public class BubbleTeaStoreRegister {
     public static void main(String[] args) throws IOException {
 
         int choice;
+        boolean opt;
 
         // Create a store - it can either be loaded in from file or an example store will be made.
         BubbleTeaStore store = loadStore();
@@ -399,7 +400,18 @@ public class BubbleTeaStoreRegister {
                 administrativeMode(store);
             }else{
 
-                store.writeExampleStoreFile();
+                // Ask to save the store to a file or not
+                opt = yesOrNo("Save store to file? ");
+
+                // If so, define a filename and write the store to file
+                if (opt == true){
+                    System.out.print("Enter the file name: ");
+                    String name = s.nextLine();
+
+                    store.writeStoreToFile(store, name);
+                } // End if
+
+                // Then quit the program regardless if the user specified yes or no
                 break;
             }
 
