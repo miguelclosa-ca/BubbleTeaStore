@@ -1,6 +1,7 @@
+import java.io.*;
 import java.util.*;
 
-public class BubbleTeaStore {
+public class BubbleTeaStore implements Serializable{
 
     private String storeName, storeLocation;
     private String exchangeRate;
@@ -121,11 +122,42 @@ public class BubbleTeaStore {
 
     } // static BubbleTeaStore createStore()
 
-    public static void createStoreFile(){
+    public static boolean writeExampleStoreFile() throws IOException {
 
+        // For now, create an example file
         BubbleTeaStore exampleStore = createStore();
 
 
+        // Push its contents to a file
+        try{
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("ExampleStore.txt"));
+
+            // Save the store to file
+            out.writeObject(exampleStore);
+
+            out.close();
+
+        }catch (IOException e){
+            return false;
+        } // End try
+
+        return true;
+
+    }
+
+    public static BubbleTeaStore loadStoreFile(String filename){
+        try{
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename));
+
+            BubbleTeaStore store = (BubbleTeaStore) in.readObject();
+
+            in.close();
+
+            return store;
+
+        } catch (ClassNotFoundException | IOException e) {
+            return null;
+        }
 
 
     }

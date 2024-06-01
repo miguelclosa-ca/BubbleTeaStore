@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.time.*;
@@ -362,14 +363,13 @@ public class BubbleTeaStoreRegister {
         String[] initialOptions = {"Read from file", "Load example store"};
         // Load a store saved on the computer or open an example store
 
-
-
         // Ask the user
         printMenu(initialOptions);
         opt = getUserChoice(1, 2, "Select an option: ");
 
         if (opt == 1){
             // load from file
+            store = BubbleTeaStore.loadStoreFile("ExampleStore.txt");
         }else{
             // Create an example store
             store = BubbleTeaStore.createStore();
@@ -381,7 +381,7 @@ public class BubbleTeaStoreRegister {
 
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
 
         int choice;
 
@@ -398,6 +398,8 @@ public class BubbleTeaStoreRegister {
             }else if (choice == 2){
                 administrativeMode(store);
             }else{
+
+                store.writeExampleStoreFile();
                 break;
             }
 
