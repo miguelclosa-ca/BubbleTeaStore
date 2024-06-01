@@ -356,16 +356,37 @@ public class BubbleTeaStoreRegister {
 
     }
 
+    public static BubbleTeaStore loadStore(){
+        int opt;
+        BubbleTeaStore store = null;
+        String[] initialOptions = {"Read from file", "Load example store"};
+        // Load a store saved on the computer or open an example store
+
+
+
+        // Ask the user
+        printMenu(initialOptions);
+        opt = getUserChoice(1, 2, "Select an option: ");
+
+        if (opt == 1){
+            // load from file
+        }else{
+            // Create an example store
+            store = BubbleTeaStore.createStore();
+        } // End if
+
+
+        return store;
+    }
+
 
 
     public static void main(String[] args){
 
-        // TODO: Add file io
-
-        // Create the store
-        BubbleTeaStore store = BubbleTeaStore.createStore();
-
         int choice;
+
+        // Create a store - it can either be loaded in from file or an example store will be made.
+        BubbleTeaStore store = loadStore();
 
 
         while (true){
