@@ -122,29 +122,6 @@ public class BubbleTeaStore implements Serializable{
 
     } // static BubbleTeaStore createStore()
 
-//    public static boolean writeExampleStoreFile() throws IOException {
-//
-//        // For now, create an example file
-//        BubbleTeaStore exampleStore = createStore();
-//
-//
-//        // Push its contents to a file
-//        try{
-//            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("ExampleStore.txt"));
-//
-//            // Save the store to file
-//            out.writeObject(exampleStore);
-//
-//            out.close();
-//
-//        }catch (IOException e){
-//            return false;
-//        } // End try
-//
-//        return true;
-//
-//    }
-
     /**
      * Create a BubbleTeaStore object text file in the directory.
      * @param store The store to save

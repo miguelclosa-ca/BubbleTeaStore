@@ -339,6 +339,11 @@ public class BubbleTeaStoreRegister {
 
     }
 
+    /**
+     * Change the tax rate of the store.
+     * @param currentRate The current tax rate the store will change
+     * @return The tax rate the user would like to change it to as a double
+     */
     public static double changeTaxRate(double currentRate){
         double opt;
 
@@ -356,6 +361,7 @@ public class BubbleTeaStoreRegister {
         return currentRate;
 
     }
+
 
     public static BubbleTeaStore loadStore(){
         int opt;
@@ -431,8 +437,8 @@ public class BubbleTeaStoreRegister {
 
                 // Then quit the program regardless if the user specified yes or no
                 break;
-            }
+            } // End if
 
-        }
+        } // End while
     }
 }
