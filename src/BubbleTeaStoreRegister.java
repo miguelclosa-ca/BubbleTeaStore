@@ -1,3 +1,7 @@
+/**
+ *
+ */
+
 import java.io.IOException;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -11,11 +15,19 @@ public class BubbleTeaStoreRegister {
     static LocalTime currTime = LocalTime.now().truncatedTo(ChronoUnit.SECONDS);
 
 
+    /**
+     * Get the user's choice given a numbered list of objects.
+     * @param min The minimum number to choose from
+     * @param max The maximum number to choose from
+     * @param question The question to ask the user
+     * @return The user's valid selection
+     */
     public static int getUserChoice(int min, int max, String question){
 
         System.out.println();
         int opt = 0;
 
+        // Attempt to ask for a valid value
         do{
             try{
                 System.out.print(question);
@@ -34,29 +46,43 @@ public class BubbleTeaStoreRegister {
     } // int getUserChoice(int, int, String)
 
 
+    /**
+     * Ask a simple yes/no question. Get the user's response after asking.
+     * @param question The question to ask
+     * @return A boolean expression mimicking the user saying yes (true) or no (false)
+     */
     public static boolean yesOrNo(String question){
 
+        // Create an array of available options
         String[] availableOptions = {"yes", "no", "y", "n"};
         String opt;
 
 
         while (true){
+            // Ask the question
             System.out.println(question);
+
+            // Get the user's input and turn the input into lowercase
             opt = s.nextLine().toLowerCase();
 
+            // If the input is valid, escape this while loop
             if (Arrays.asList(availableOptions).contains(opt)){
                 break;
             }else{
+                // Otherwise do not
                 System.out.println("Enter a valid value. ");
             } // End if
         } // End while
 
+        // If the user says yes, return true
         if (opt.equals("yes") || opt.equals("y")) {
             return true;
         }else{
+
+            // Otherwise, return false
             return false;
         } // End if
-    }
+    } // boolean yesOrNo(String)
 
 
 
@@ -65,7 +91,6 @@ public class BubbleTeaStoreRegister {
             System.out.println("Your Cart is Empty. ");
         }else{
             for (int i = 0; i < drinksInCart.size(); i++){
-//                System.out.println("Drink " + (i+1) + ". " + "\n" +drinksInCart.get(i).toString());
                 System.out.println("Drink " + (i+1) + ". " + "\n" +drinksInCart.get(i).printReceiptFormat(exchangeRate));
                 System.out.println();
             } // End for
@@ -89,7 +114,7 @@ public class BubbleTeaStoreRegister {
 
         selection = getUserChoice(1,3, "Enter your Choice: ");
         return selection;
-    }
+    } // int showMenu()
 
 
     public static ArrayList<BubbleTea> makeSale(BubbleTeaStore store){
@@ -123,7 +148,7 @@ public class BubbleTeaStoreRegister {
         return currentCart;
 
 
-    }
+    } // ArrayList<BubbleTea> makeSale(BubbleTeaStore)
 
     public static void printReceipt(ArrayList<BubbleTea> cart, BubbleTeaStore store){
 
@@ -280,18 +305,21 @@ public class BubbleTeaStoreRegister {
         choice = getUserChoice(0, store.getSugarLevels().size(), "Choose your Sugar Level: ") - 1;
         myDrink.setSugarLevel(store.getSugarLevels().get(choice));
 
-
+        // Now the drink is complete.
         return myDrink;
-    }
+    } // BubbleTea createDrink(BubbleTeaStore)
 
+    /**
+     * Change parameters of the BubbleTeaStore.
+     * @param store The store to modify
+     */
     public static void administrativeMode(BubbleTeaStore store){
         String[] adminMenu = {"Edit Exchange Rate", "Edit Tax Rate", "Add/Remove item", "Exit"};
         int opt;
 
-
-
         while (true){
 
+            System.out.println("---|| Admin Menu ||---");
             printMenu(adminMenu);
 
             opt = getUserChoice(1, 4, "Enter your choice: ");
@@ -372,6 +400,8 @@ public class BubbleTeaStoreRegister {
         // Load a store saved on the computer or open an example store
 
         // Ask the user for their choice
+        System.out.println("---|| Choose Load Type: ||---");
+
         printMenu(initialOptions);
         opt = getUserChoice(1, 2, "Select an option: ");
 
@@ -410,10 +440,15 @@ public class BubbleTeaStoreRegister {
         String[] modMenu = {"View Whole Store", "Add Item", "Remove Item", "Exit"};
 
         while (true){
+            System.out.println();
+            System.out.println("---|| Add / Remove Menu ||---");
             printMenu(modMenu);
             opt = getUserChoice(1,4, "Enter your choice: " ) ;
             if (opt == 1){
                 // View all
+
+                BubbleTeaStore.listStore(store);
+
             }else if (opt == 2){
                 // add item
             }else if (opt == 3){

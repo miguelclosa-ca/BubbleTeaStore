@@ -186,4 +186,47 @@ public class BubbleTeaStore implements Serializable{
     } // static boolean storeExists(String)
 
 
+    /**
+     * View all Products in a store (for administrative purposes).
+     * @param store Store to view the contents of
+     */
+    public static void listStore(BubbleTeaStore store){
+
+        int i = 1;
+
+        System.out.println("---|| All Drink Bases and Prices ||---");
+        // List all the Drink bases and Prices
+        for (Map.Entry<String, Double> entry : store.getDrinkBases().entrySet()){
+            System.out.println(i + ". " + entry.getKey() + " - $" + String.format("%.2f", entry.getValue()));
+            i++;
+        } // End for
+
+        i=1;
+        System.out.println();
+        System.out.println();
+        System.out.println("---|| All Drink Toppings and Prices ||---");
+        for (Map.Entry<String, Double> entry : store.getDrinkToppings().entrySet()){
+            System.out.println(i + ". " + entry.getKey() + " - $" + String.format("%.2f", entry.getValue()));
+            i++;
+        } // End for
+        System.out.println();
+        System.out.println();
+        System.out.println("---|| All Ice levels ||---");
+        for (int j = 0; j < store.getIceLevels().size(); j++){
+            System.out.println((j+1) + ". " + store.getIceLevels().get(j));
+        }// End for
+
+        System.out.println();
+        System.out.println();
+        System.out.println("---|| All Sugar levels ||---");
+        for (int j = 0; j < store.getSugarLevels().size(); j++){
+            System.out.println((j+1) + ". " + store.getSugarLevels().get(j));
+        }// End for
+        System.out.println();
+        System.out.println();
+
+
+    }
+
+
 }
