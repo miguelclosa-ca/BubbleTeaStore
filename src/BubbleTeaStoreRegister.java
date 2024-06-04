@@ -294,7 +294,7 @@ public class BubbleTeaStoreRegister {
 
             printMenu(adminMenu);
 
-            opt = getUserChoice(1, 4, "Enter your choice");
+            opt = getUserChoice(1, 4, "Enter your choice: ");
 
             if (opt == 1){
                 // Change the exchange rate
@@ -304,6 +304,7 @@ public class BubbleTeaStoreRegister {
                 store.setTaxRate(changeTaxRate(store.getTaxRate()));
             }else if (opt == 3){
                 // Add or remove an item
+                modifyAttributesMenu(store);
             }else{
                 // Exit administrative options
                 break;
@@ -403,6 +404,27 @@ public class BubbleTeaStoreRegister {
         // Return the store
         return store;
     } // static BubbleTeaStore loadStore()
+
+    public static void modifyAttributesMenu(BubbleTeaStore store){
+        int opt;
+        String[] modMenu = {"View Whole Store", "Add Item", "Remove Item", "Exit"};
+
+        while (true){
+            printMenu(modMenu);
+            opt = getUserChoice(1,4, "Enter your choice: " ) ;
+            if (opt == 1){
+                // View all
+            }else if (opt == 2){
+                // add item
+            }else if (opt == 3){
+                // remove item
+            } else{
+                break;
+            } // End if
+        } // End while
+
+
+    } // void modifyAttributesMenu
 
 
     public static void main(String[] args) throws IOException {
