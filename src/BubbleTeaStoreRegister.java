@@ -463,6 +463,10 @@ public class BubbleTeaStoreRegister {
     } // void modifyAttributesMenu
 
 
+    /**
+     * In this menu-driven method, add either drink bases, drink toppings, ice levels, or sugar levels.
+     * @param store The store to add to
+     */
     public static void addItem(BubbleTeaStore store){
         int opt;
         String input;
@@ -476,6 +480,8 @@ public class BubbleTeaStoreRegister {
             opt = getUserChoice(1,5,"Enter your choice: ");
 
             if (opt == 1){
+
+                // If the user selects 1, ask for the name of the drink base and the price of the drink
                 System.out.println("Adding a Drink Base.");
                 System.out.println();
                 System.out.print("Enter the name of the drink base: " );
@@ -491,6 +497,7 @@ public class BubbleTeaStoreRegister {
 
             } else if (opt == 2) {
 
+                // If 2, ask for the name of the drink topping and the price of the topping
                 System.out.println("Adding a Drink Topping.");
                 System.out.println();
                 System.out.print("Enter the name of the drink topping: " );
@@ -500,30 +507,40 @@ public class BubbleTeaStoreRegister {
                 System.out.println("How much will " + input + " cost? ");
                 price = s.nextDouble();
 
-                // Add the drink base and cost to the HashMap of drink bases.
+                // Add the drink base and cost to the HashMap of drink toppings.
                 System.out.println("Adding " + input + " at a cost of $" + String.format("%.2f", price));
                 store.getDrinkToppings().put(input, price);
             } else if (opt == 3){
+
+                // If 3, ask for the percentage level of ice (between 0-150%)
                 System.out.println("Adding an Ice Level.");
                 System.out.println();
 
+                // This can be done by utilizing the getUserChoice() method written earlier to get a valid input.
                 opt = getUserChoice(0, 150, "Enter the Percentage of Ice to add: ");
 
-                store.getIceLevels().add(String.valueOf(opt) + "% Ice");
+                // Add the ice level to the ArrayList of ice levels.
+                System.out.println("Adding " + opt + "% Ice");
+                store.getIceLevels().add(opt + "% Ice");
 
 
             } else if (opt == 4){
+
+                // If 4, ask for the name of the level of sugar
                 System.out.println("Adding a Sugar Level.");
                 System.out.println();
 
                 System.out.print("Enter A Sugar Level: ");
                 input = s.nextLine();
 
+                // Add the sugar level to the ArrayList of sugar levels.
+                System.out.println("Adding Sugar Level: " + input);
                 store.getSugarLevels().add(input);
             }else{
                 break;
             } // End if
         } // End while
+
     } // void addItem(BubbleTeaStore)
 
 
