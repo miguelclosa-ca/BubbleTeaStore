@@ -450,6 +450,7 @@ public class BubbleTeaStoreRegister {
                 BubbleTeaStore.listStore(store);
 
             }else if (opt == 2){
+                addItem(store);
                 // add item
             }else if (opt == 3){
                 // remove item
@@ -460,6 +461,70 @@ public class BubbleTeaStoreRegister {
 
 
     } // void modifyAttributesMenu
+
+
+    public static void addItem(BubbleTeaStore store){
+        int opt;
+        String input;
+        double price;
+        String[] addMenu = {"Add Drink Base", "Add Topping", "Add Ice Level", "Add Sugar Level", "Exit"};
+
+        while (true){
+            System.out.println();
+            System.out.println("---|| Add Menu ||---");
+            printMenu(addMenu);
+            opt = getUserChoice(1,5,"Enter your choice: ");
+
+            if (opt == 1){
+                System.out.println("Adding a Drink Base.");
+                System.out.println();
+                System.out.print("Enter the name of the drink base: " );
+                input = s.nextLine();
+
+                System.out.println();
+                System.out.println("How much will " + input + " cost? ");
+                price = s.nextDouble();
+
+                // Add the drink base and cost to the HashMap of drink bases.
+                System.out.println("Adding " + input + " at a cost of $" + String.format("%.2f", price));
+                store.getDrinkBases().put(input, price);
+
+            } else if (opt == 2) {
+
+                System.out.println("Adding a Drink Topping.");
+                System.out.println();
+                System.out.print("Enter the name of the drink topping: " );
+                input = s.nextLine();
+
+                System.out.println();
+                System.out.println("How much will " + input + " cost? ");
+                price = s.nextDouble();
+
+                // Add the drink base and cost to the HashMap of drink bases.
+                System.out.println("Adding " + input + " at a cost of $" + String.format("%.2f", price));
+                store.getDrinkToppings().put(input, price);
+            } else if (opt == 3){
+                System.out.println("Adding an Ice Level.");
+                System.out.println();
+
+                opt = getUserChoice(0, 150, "Enter the Percentage of Ice to add: ");
+
+                store.getIceLevels().add(String.valueOf(opt) + "% Ice");
+
+
+            } else if (opt == 4){
+                System.out.println("Adding a Sugar Level.");
+                System.out.println();
+
+                System.out.print("Enter A Sugar Level: ");
+                input = s.nextLine();
+
+                store.getSugarLevels().add(input);
+            }else{
+                break;
+            } // End if
+        } // End while
+    } // void addItem(BubbleTeaStore)
 
 
     public static void main(String[] args) throws IOException {
