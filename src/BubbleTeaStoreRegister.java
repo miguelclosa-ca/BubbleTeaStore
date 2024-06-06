@@ -571,6 +571,14 @@ public class BubbleTeaStoreRegister {
                     System.out.print("Enter the file name: ");
                     String name = s.nextLine();
 
+                    // Check if the file exists already
+                    if (BubbleTeaStore.storeExists(name)){
+                        // If so, append "_copy" to the end to keep from overwriting
+                        System.out.println(name + " already exists in the directory. ");
+                        name += "_copy";
+
+                    } // End if
+                    System.out.println("Saving file as: " + name + ".");
                     store.writeStoreToFile(store, name);
                 } // End if
 
