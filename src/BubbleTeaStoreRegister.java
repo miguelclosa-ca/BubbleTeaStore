@@ -435,6 +435,10 @@ public class BubbleTeaStoreRegister {
         return store;
     } // static BubbleTeaStore loadStore()
 
+    /**
+     * View the menu allowing
+     * @param store
+     */
     public static void modifyAttributesMenu(BubbleTeaStore store){
         int opt;
         String[] modMenu = {"View Whole Store", "Add Item", "Remove Item", "Exit"};
@@ -454,6 +458,7 @@ public class BubbleTeaStoreRegister {
                 // add item
             }else if (opt == 3){
                 // remove item
+                removeItem(store);
             } else{
                 break;
             } // End if
@@ -542,6 +547,43 @@ public class BubbleTeaStoreRegister {
         } // End while
 
     } // void addItem(BubbleTeaStore)
+
+    public static void removeItem(BubbleTeaStore store){
+        int opt;
+        int index = 1;
+        String[] menu = {"Remove Drink Base", "Remove Drink Topping", "Remove Ice Level", "Remove Sugar Level", "Exit"};
+
+        while (true){
+            printMenu(menu);
+
+            opt = s.nextInt();
+
+            System.out.println();
+            System.out.println();
+
+            if (opt == 1){
+                // Remove base
+
+                // Print out all Drink Bases in the store
+                System.out.println("---|| Drinks In the Store Right Now ||---");
+                for (Map.Entry<String, Double> entry: store.getDrinkBases().entrySet()){
+                    System.out.println(index + ". " + entry.getKey() + " - $" + String.format("%.2f", entry.getValue()));
+                    index++;
+                } // End for
+
+                // Ask the user which 
+
+            }else if (opt == 2){
+                // Remove topping
+            }else if (opt == 3){
+                // Remove Ice level
+            }else if (opt == 4){
+                // Remove Sugar level
+            }else{
+                break;
+            } // End if
+        } // End while
+    } // void removeItem(BubbleTeaStore)
 
 
     public static void main(String[] args) throws IOException {
