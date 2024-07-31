@@ -565,37 +565,62 @@ public class BubbleTeaStoreRegister {
             System.out.println();
 
             if (opt == 1){
-                // Remove base
 
-                // Temporarily create an array of Strings
-                tempList = new String[store.getDrinkBases().size()];
-                // Print out all Drink Bases in the store, while also copying all the key values from the list of drink bases
-                System.out.println("---|| Drinks In the Store Right Now ||---");
-                for (Map.Entry<String, Double> entry: store.getDrinkBases().entrySet()){
+                // This can only run if there are drink bases in the first place
+                if (!store.getDrinkBases().isEmpty()) {
+                    // Remove base
 
-                    tempList[index] = entry.getKey();
-                    System.out.println(index + 1 + ". " + tempList[index]);
-                    index++;
-                } // End for
+                    // Temporarily create an array of Strings
+                    tempList = new String[store.getDrinkBases().size()];
+                    // Print out all Drink Bases in the store, while also copying all the key values from the list of drink bases
+                    System.out.println("---|| Drinks In the Store Right Now ||---");
+                    for (Map.Entry<String, Double> entry : store.getDrinkBases().entrySet()) {
 
-                // Ask the user which drink base they would like to remove
-                opt = getUserChoice(1, tempList.length, "Enter the nubmer you would like to erase: ") - 1;
+                        tempList[index] = entry.getKey();
+                        System.out.println(index + 1 + ". " + tempList[index]);
+                        index++;
+                    } // End for
 
-//                itemToRemove = tempList[opt];
-
-
-
-                // Remove the drink from the store
-                store.getDrinkBases().remove(tempList[opt]);
-                System.out.println("Removed " + tempList[opt] + " from the menu. ");
+                    // Ask the user which drink base they would like to remove
+                    opt = getUserChoice(1, tempList.length, "Enter the number you would like to erase: ") - 1;
 
 
-
-
+                    // Remove the drink from the store
+                    store.getDrinkBases().remove(tempList[opt]);
+                    System.out.println("Removed " + tempList[opt] + " from the menu. ");
+                    System.out.println();
+                }else{
+                    System.out.println("There are no drink bases. Please add some drink bases. ");
+                } // End if
 
 
             }else if (opt == 2){
                 // Remove topping
+                if (!store.getDrinkToppings().isEmpty()){
+
+                    // Temporarily create an array of Strings
+                    tempList = new String[store.getDrinkToppings().size()];
+                    // Print out all Drink toppings in the store, while also copying all the key values from the list of toppings
+                    System.out.println("---|| Toppings Available Right Now ||---");
+                    for (Map.Entry<String, Double> entry : store.getDrinkToppings().entrySet()) {
+
+                        tempList[index] = entry.getKey();
+                        System.out.println(index + 1 + ". " + tempList[index]);
+                        index++;
+                    } // End for
+
+                    // Ask the user which topping they would like to remove
+                    opt = getUserChoice(1, tempList.length, "Enter the number you would like to erase: ") - 1;
+
+
+                    // Remove the topping from the store
+                    store.getDrinkBases().remove(tempList[opt]);
+                    System.out.println("Removed " + tempList[opt] + " from the menu. ");
+                    System.out.println();
+                }else{
+                    System.out.println("There are no drink toppings. Please add some drink toppings.");
+                } // End if
+
             }else if (opt == 3){
                 // Remove Ice level
             }else if (opt == 4){
