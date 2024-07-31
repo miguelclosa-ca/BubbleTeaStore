@@ -623,8 +623,52 @@ public class BubbleTeaStoreRegister {
 
             }else if (opt == 3){
                 // Remove Ice level
+
+                if (!store.getIceLevels().isEmpty()){
+
+                    // Display all ice levels
+                    for (int i = 0; i < store.getIceLevels().size(); i++){
+                        System.out.println((i + 1) + store.getIceLevels().get(i));
+                    } // End for
+
+                    // Ask the user which ice level they would like to remove
+                    opt = getUserChoice(1, store.getIceLevels().size(), "Enter the Number you would like to erase: ") - 1;
+
+                    // Remove the user's choice
+                    store.getIceLevels().remove(opt);
+
+                    System.out.println("Removed! ");
+                    System.out.println();
+
+
+                }else {
+                    System.out.println("There are no ice levels. Please add some ice levels.");
+                }
+
             }else if (opt == 4){
                 // Remove Sugar level
+
+                if (!store.getSugarLevels().isEmpty()){
+
+                    // Display all sugar levels
+                    for (int i = 0; i < store.getSugarLevels().size(); i++){
+                        System.out.println((i + 1) + store.getSugarLevels().get(i));
+                    } // End for
+
+                    // Ask the user which sugar level they would like to remove
+                    opt = getUserChoice(1, store.getSugarLevels().size(), "Enter the Number you would like to erase: ") - 1;
+
+                    // Remove the user's choice
+                    store.getSugarLevels().remove(opt);
+
+                    System.out.println("Removed! ");
+                    System.out.println();
+
+
+                }else {
+                    System.out.println("There are no sugar levels. Please add some sugar levels.");
+                }
+
             }else{
                 break;
             } // End if
