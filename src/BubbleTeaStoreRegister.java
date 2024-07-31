@@ -550,8 +550,11 @@ public class BubbleTeaStoreRegister {
 
     public static void removeItem(BubbleTeaStore store){
         int opt;
-        int index = 1;
+        int index = 0;
         String[] menu = {"Remove Drink Base", "Remove Drink Topping", "Remove Ice Level", "Remove Sugar Level", "Exit"};
+//        ArrayList<String> tempList = new ArrayList();
+        String[] tempList;
+
 
         while (true){
             printMenu(menu);
@@ -564,14 +567,32 @@ public class BubbleTeaStoreRegister {
             if (opt == 1){
                 // Remove base
 
-                // Print out all Drink Bases in the store
+                // Temporarily create an array of Strings
+                tempList = new String[store.getDrinkBases().size()];
+                // Print out all Drink Bases in the store, while also copying all the key values from the list of drink bases
                 System.out.println("---|| Drinks In the Store Right Now ||---");
                 for (Map.Entry<String, Double> entry: store.getDrinkBases().entrySet()){
-                    System.out.println(index + ". " + entry.getKey() + " - $" + String.format("%.2f", entry.getValue()));
+
+                    tempList[index] = entry.getKey();
+                    System.out.println(index + 1 + ". " + tempList[index]);
                     index++;
                 } // End for
 
-                // Ask the user which 
+                // Ask the user which drink base they would like to remove
+                opt = getUserChoice(1, tempList.length, "Enter the nubmer you would like to erase: ") - 1;
+
+//                itemToRemove = tempList[opt];
+
+
+
+                // Remove the drink from the store
+                store.getDrinkBases().remove(tempList[opt]);
+                System.out.println("Removed " + tempList[opt] + " from the menu. ");
+
+
+
+
+
 
             }else if (opt == 2){
                 // Remove topping
@@ -629,5 +650,5 @@ public class BubbleTeaStoreRegister {
             } // End if
 
         } // End while
-    }
+    } // void main(String[])
 }
