@@ -27,5 +27,4 @@ BubbleTeaStoreRegister.java simulating the register of a BubbleTeaStore
 > Perform administrative tasks (edit exchnage rate, add menu items)
 
 ## To do
->1. Finish core features (remove items from menu)
 >2. Move to GUI 
